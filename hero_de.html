@@ -117,6 +117,16 @@ nav {
   border: 1px solid rgba(201,148,58,0.2);
   margin: 16px 0;
 }
+.content-video {
+  width: 100%; border-radius: 4px;
+  border: 1px solid rgba(201,148,58,0.2);
+  margin: 16px 0; background: #000; display: block;
+}
+.content-video-cap {
+  font-size: 12px; color: var(--silver); text-align: center;
+  margin: -8px 0 16px; font-family: 'Lora', serif; font-style: italic;
+  letter-spacing: 0.02em;
+}
 .site-img {
   width: 100%; height: 220px; object-fit: cover;
   border-radius: 2px; margin-bottom: 16px;
@@ -285,14 +295,15 @@ hr.ornament {
 /* ─── TIMELINE ─── */
 .timeline { margin: 40px 0; }
 .tl-item {
-  display: grid; 
-  grid-template-columns: 100px 1fr; /* 修改此处：拓宽左侧列宽，给日期文字更多空间 */
-  gap: 30px; margin-bottom: 0;
+  display: grid;
+  grid-template-columns: 100px 20px 1fr;
+  column-gap: 14px;
+  margin-bottom: 0;
   position: relative;
 }
 .tl-item::after {
   content: '';
-  position: absolute; left: 115px; top: 24px; bottom: -1px; /* 修改此处：轴线向右偏移 */
+  position: absolute; left: 127px; top: 24px; bottom: -1px;
   width: 1px; background: rgba(201,148,58,0.15);
 }
 .tl-item:last-child::after { display: none; }
@@ -302,13 +313,13 @@ hr.ornament {
   padding-top: 4px; line-height: 1.4;
 }
 .tl-dot {
-  position: absolute; left: 110px; top: 7px; /* 修改此处：时间轴圆点跟随向右移位 */
   width: 11px; height: 11px; border-radius: 50%;
   background: var(--night); border: 1.5px solid var(--gold);
+  justify-self: center; margin-top: 7px;
 }
 .tl-dot.red { border-color: var(--red-bright); }
 .tl-body {
-  padding: 0 0 32px 0; /* 修改此处：修复内间距 */
+  padding: 0 0 32px 0;
 }
 .tl-title {
   font-size: 14px; font-weight: 500; color: var(--white);
@@ -460,9 +471,8 @@ hr.ornament {
 /* ─── SMALL-SCREEN REFINEMENTS ─── */
 @media (max-width: 460px) { .nav-title { display: none; } }
 @media (max-width: 400px) {
-  .tl-item { grid-template-columns: 66px 1fr; gap: 16px; }
+  .tl-item { grid-template-columns: 64px 16px 1fr; column-gap: 10px; }
   .tl-item::after { left: 82px; }
-  .tl-dot { left: 77px; }
   .battle { padding: 24px 18px; }
   .diary { padding: 28px 20px; }
   .hero { padding: 72px 5vw 50px; }
@@ -470,6 +480,7 @@ hr.ornament {
 @media (max-width: 600px) {
   section { padding: 60px 5vw; }
   .mourning { padding: 60px 5vw 80px; }
+  .hero-scroll { position: static; margin-top: 36px; transform: none; }
 }
 @media (max-height: 480px) and (orientation: landscape) {
   .hero { min-height: auto; padding: 90px 6vw 40px; }
@@ -555,7 +566,7 @@ hr.ornament {
     </div>
     <div class="prose">
       <p>Li Yougan war der jüngere Bruder von <strong>Li Youxing</strong>, dem bekannten Maler, Kunstpädagogen und Gründer der Sichuan Kunstakademie — acht Jahre älter als er. Als Jüngster von drei Brüdern war er zugleich der Kühnste: Als Teenager lief er allein nach Südostasien davon, und später reiste er heimlich nach Jianqiao bei Hangzhou, um die Aufnahmeprüfung der Zentralen Luftfahrtschule abzulegen — er wurde einer der ersten Jagdflieger Chinas.</p>
-      <p>Als die Schlacht um Shanghai ausbrach, flog seine Einheit Einsatz um Einsatz, bis Mensch und Maschine gleichermaßen erschöpft waren. Am <strong>18. September 1937</strong> — dem sechsten Jahrestag des Mukden-Zwischenfalls — nahm er an einem nächtlichen Angriff zum Mittherbstfest auf japanische Truppen in Shanghai teil. Mit einem bereits veralteten Doppeldecker vom Typ Hawk III griff er ein feindliches Flaggschiff auf dem Huangpu-Fluss an und wurde von konzentriertem Flakfeuer getroffen.</p>
+      <p>Als die Schlacht um Shanghai ausbrach, flog seine Einheit Einsatz um Einsatz, unerschrocken und furchtlos. Am <strong>18. September 1937</strong> — dem sechsten Jahrestag des Mukden-Zwischenfalls — startete die Luftwaffe die „Mittherbst-Nachtoffensive" gegen die japanischen Besatzungstruppen in Shanghai. Mit einem bereits veralteten Doppeldecker vom Typ Hawk III griff er ein feindliches Flaggschiff auf dem Huangpu-Fluss an und wurde von konzentriertem Flakfeuer getroffen.</p>
       <p>Er hinterließ keine Kinder. Er war vierundzwanzig Jahre alt. Sein Bruder Li Youxing reiste nach Nanjing, um seine Habseligkeiten zu sammeln, und fand darunter nichts — nicht einmal ein Foto —, das darauf hindeutete, dass er je verliebt gewesen war.</p>
     </div>
   </div>
@@ -572,7 +583,7 @@ hr.ornament {
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-title">Geboren in Nr. 38 Wuding Hou Xikouwai, Beiping</div>
-          <div class="tl-desc">Sein Vater Li Baimin arbeitete in Peking, und alle drei Brüder wuchsen dort auf. Acht Jahre jünger als sein zweiter Bruder Li Youxing, wurde er größtenteils von diesem betreut, der ihn auf Spaziergänge zu den Duftenden Hügeln und zum Jadequellberg mitnahm.</div>
+          <div class="tl-desc">Sein Vater Li Baimin arbeitete in Peking, und alle drei Brüder wuchsen dort auf. Acht Jahre jünger als sein zweiter Bruder Li Youxing, waren die beiden wie Brüder eng verbunden, der ihn auf Spaziergänge zu den Duftenden Hügeln und zum Jadequellberg mitnahm.</div>
         </div>
       </div>
       <div class="tl-item">
@@ -580,7 +591,7 @@ hr.ornament {
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-title">Aufnahme in das Waisenheim der Duftenden Hügel</div>
-          <div class="tl-desc">Sein Bruder sorgte für seine Unterbringung dort. Jeden Sonntag, wenn Li Youxing mit dem Fahrrad zu Besuch kam, lief er ihm entgegen und zeigte ihm alles.</div>
+          <div class="tl-desc">Sein Vater sorgte für seine Unterbringung dort. Jeden Sonntag, wenn Li Youxing mit dem Fahrrad zu Besuch kam, lief er ihm entgegen und zeigte ihm alles.</div>
         </div>
       </div>
       <div class="tl-item">
@@ -596,7 +607,7 @@ hr.ornament {
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-title">Heimliche Aufnahmeprüfung in Jianqiao, Hangzhou</div>
-          <div class="tl-desc">Die Zentrale Luftfahrtschule in Jianqiao war damals Chinas einzige reguläre Luftfahrtakademie. Er bewarb sich, ohne der Familie etwas zu sagen, und begann als Kadett der 5. Klasse, Abteilung B, seine Fliegerlaufbahn.</div>
+          <div class="tl-desc">Die Zentrale Luftfahrtschule in Jianqiao war damals Chinas einzige reguläre Luftfahrtakademie. Er bewarb sich, ohne der Familie etwas zu sagen, und begann als Kadett der 5. Klasse, Abteilung B, seine militärische Laufbahn.</div>
         </div>
       </div>
       <div class="tl-item">
@@ -635,7 +646,11 @@ hr.ornament {
     <div class="battle">
       <div class="battle-eyebrow">Aus dem Archiv des Taiwanesischen Märtyrerschreins · Kampfbericht der Luftwaffe, Schlacht um Shanghai</div>
       <div class="battle-title">Der nächtliche Angriff zum Mittherbstfest, 18. September</div>
-      <img src="images/hawk-iii-aircraft.webp" alt="Hawk-III-Doppeldecker" class="content-img" loading="lazy">
+      <video controls playsinline preload="metadata" poster="images/hawk-iii-aircraft.webp" class="content-video">
+        <source src="video/early-airforce-footage.mp4" type="video/mp4">
+        Ihr Browser unterstützt die Videowiedergabe nicht. <a href="video/early-airforce-footage.mp4" style="color:var(--gold-pale);">Zum Herunterladen anklicken</a>.
+      </video>
+      <p class="content-video-cap">Authentische Filmaufnahmen der frühen chinesischen Luftwaffe</p>
       <div class="battle-text">
         <p>Am 17. September 1937 sagte Madame Chiang Kai-shek zu den Offizieren der Luftfahrtkommission: <strong>"Meine Herren, Sie müssen nicht erst hören, was morgen für ein Tag ist. Es ist der sechste Jahrestag des Mukden-Zwischenfalls. Um diese Schmach zu tilgen, befiehlt der Generalissimus der Luftwaffe, dem Feind den härtesten Schlag zu versetzen…"</strong></p>
         <p>Der 18. September fiel in jenem Jahr auf das Mittherbstfest. Die in Nanjing stationierten Piloten, die seit sechs Jahren jeden 18. September zum Gedenken an die nationale Demütigung fasteten, erhielten nun ihre Befehle — und entschlossen sich, die ganze Nacht hindurch, Welle um Welle, gegen Shanghai zu fliegen.</p>
@@ -646,7 +661,7 @@ hr.ornament {
     </div>
     <div class="prose">
       <p>Sein Name erscheint, rot markiert für die Gefallenen, auf der Liste der 5. Klasse der Zentralen Luftfahrtschule: <strong>"September 1937 — durch Flakfeuer getötet beim Bombardement japanischer Stellungen am Huishan-Kai."</strong></p>
-      <p>Jeder Flugschüler dieses Jahrgangs starb im Dienst. Chinas erste Generation von Jagdfliegern hörte vor 1942 beinahe vollständig auf zu existieren — mit Flugzeugen, die dem Feind weit unterlegen waren, tauschten sie ihr Leben, im Schnitt mit dreiundzwanzig Jahren, einzig um ihrem Land Zeit zu erkaufen.</p>
+      <p>Jeder Flugschüler dieses Jahrgangs starb im Dienst. Jeder einzige Pilot von Chinas erster Generation von Jagdfliegern, der vor 1942 in den Himmel aufstieg, fiel im Kampf — mit Flugzeugen, die dem Feind weit unterlegen waren, tauschten sie ihr Leben, im Schnitt mit dreiundzwanzig Jahren, einzig um ihrem Land Zeit zu erkaufen.</p>
     </div>
   </div>
 </section>
@@ -721,7 +736,7 @@ hr.ornament {
     <h2 class="section-title">Drei Brüder der Familie Li aus Shuangban, Zitong</h2>
     <div class="prose">
       <p>Die Familie Li aus Shuangban, Zitong, Sichuan, war in der zweiten Generation nach Beiping gezogen — und nach Li Youxings eigenen Worten waren alle drei Brüder "Rebellen im Herzen." Der Älteste, Li Youdu, war ein Student der Bewegung des Vierten Mai an der Fremdsprachenfakultät der Peking-Universität, der lieber auf die Straße ging, als zu lernen. Der Zweite, Li Youxing, weigerte sich, wie vom Vater gewünscht ins Geschäft einzusteigen, bestand stattdessen aufs Malen und reiste bis zur Kunstschule von Lyon in Frankreich — er kam zu spät, um seinen Vater ein letztes Mal zu sehen. Der Jüngste, Li Yougan, übertraf sie beide: Er floh nach Südostasien, schrieb sich heimlich an der Luftfahrtakademie ein — jede prägende Tat seines Lebens tat er zuerst und erklärte sie nie. Zum Glück schloss der Vater die Augen, bevor er die Eskapaden seines jüngsten Sohnes miterleben musste.</p>
-      <p>Ihr Vater, Li Baimin, starb jung und sah nie, wie sein jüngster Sohn Jagdflieger wurde. Li Youxing zog ihn faktisch wie ein Vater auf — führte ihn durch den Schnee der Duftenden Hügel, benannte ihm Feldfrüchte am Jadequellberg, trug ihn durch die Dunkelheit vor dem Xizhi-Tor nach Hause. Als die Todesnachricht kam, war es daher Li Youxing, der am meisten von allen auf der Welt trauerte.</p>
+      <p>Ihr Vater, Li Baimin, starb jung und sah nie, wie sein jüngster Sohn Jagdflieger wurde. Li Youxing war ihm so eng verbunden, wie es nur Brüder sein können — führte ihn durch den Schnee der Duftenden Hügel, benannte ihm Feldfrüchte am Jadequellberg, trug ihn durch die Dunkelheit vor dem Xizhi-Tor nach Hause. Als die Todesnachricht kam, war es daher Li Youxing, der am meisten von allen auf der Welt trauerte.</p>
       <p>Auf das Album, das er von Hand für seinen Bruder anfertigte, schrieb Li Youxing später eigenhändig: <strong>"Zum Gedenken an meinen verlorenen Bruder Qunyi"</strong> — Qunyi war Li Yougans Rufname. Jenes Album wurde bei den Durchsuchungen von 1966 zerstört. Die darin enthaltenen Uniformfotos wurden nie wieder gesehen.</p>
     </div>
   </div>

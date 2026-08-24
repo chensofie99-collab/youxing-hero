@@ -117,6 +117,16 @@ nav {
   border: 1px solid rgba(201,148,58,0.2);
   margin: 16px 0;
 }
+.content-video {
+  width: 100%; border-radius: 4px;
+  border: 1px solid rgba(201,148,58,0.2);
+  margin: 16px 0; background: #000; display: block;
+}
+.content-video-cap {
+  font-size: 12px; color: var(--silver); text-align: center;
+  margin: -8px 0 16px; font-family: 'Lora', serif; font-style: italic;
+  letter-spacing: 0.02em;
+}
 .site-img {
   width: 100%; height: 220px; object-fit: cover;
   border-radius: 2px; margin-bottom: 16px;
@@ -278,14 +288,15 @@ hr.ornament {
 /* ─── TIMELINE ─── */
 .timeline { margin: 40px 0; }
 .tl-item {
-  display: grid; 
-  grid-template-columns: 100px 1fr; /* 修改此处：拓宽左侧列宽，给日期文字更多空间 */
-  gap: 30px; margin-bottom: 0;
+  display: grid;
+  grid-template-columns: 100px 20px 1fr;
+  column-gap: 14px;
+  margin-bottom: 0;
   position: relative;
 }
 .tl-item::after {
   content: '';
-  position: absolute; left: 115px; top: 24px; bottom: -1px; /* 修改此处：轴线向右偏移 */
+  position: absolute; left: 127px; top: 24px; bottom: -1px;
   width: 1px; background: rgba(201,148,58,0.15);
 }
 .tl-item:last-child::after { display: none; }
@@ -295,13 +306,13 @@ hr.ornament {
   padding-top: 4px; line-height: 1.4;
 }
 .tl-dot {
-  position: absolute; left: 110px; top: 7px; /* 修改此处：时间轴圆点跟随向右移位 */
   width: 11px; height: 11px; border-radius: 50%;
   background: var(--night); border: 1.5px solid var(--gold);
+  justify-self: center; margin-top: 7px;
 }
 .tl-dot.red { border-color: var(--red-bright); }
 .tl-body {
-  padding: 0 0 32px 0; /* 修改此处：修复内间距 */
+  padding: 0 0 32px 0;
 }
 .tl-title {
   font-size: 14px; font-weight: 500; color: var(--white);
@@ -453,9 +464,8 @@ hr.ornament {
 /* ─── SMALL-SCREEN REFINEMENTS ─── */
 @media (max-width: 460px) { .nav-title { display: none; } }
 @media (max-width: 400px) {
-  .tl-item { grid-template-columns: 66px 1fr; gap: 16px; }
+  .tl-item { grid-template-columns: 64px 16px 1fr; column-gap: 10px; }
   .tl-item::after { left: 82px; }
-  .tl-dot { left: 77px; }
   .battle { padding: 24px 18px; }
   .diary { padding: 28px 20px; }
   .hero { padding: 72px 5vw 50px; }
@@ -463,6 +473,8 @@ hr.ornament {
 @media (max-width: 600px) {
   section { padding: 60px 5vw; }
   .mourning { padding: 60px 5vw 80px; }
+  /* 修复：滚动提示改为随内容排列，避免与年份文字在矮屏上重叠 */
+  .hero-scroll { position: static; margin-top: 36px; transform: none; }
 }
 @media (max-height: 480px) and (orientation: landscape) {
   .hero { min-height: auto; padding: 90px 6vw 40px; }
@@ -497,7 +509,7 @@ hr.ornament {
   <p class="hero-tagline">
     <strong>九一八夜，中秋月圆。</strong><br>
     他驾机轰炸黄浦江上的日军旗舰，<br>
-    被高射炮击中，血洒长空。<br>
+    被高射炮击中，血洒长空，壮烈殉国，<br>
     时年二十四岁，未曾娶妻。
   </p>
   <p class="hero-years">1913 &nbsp;—&nbsp; 1937</p>
@@ -548,8 +560,8 @@ hr.ornament {
     </div>
     <div class="prose">
       <p>李有幹是著名画家、美术教育家、四川美术学院创始人<strong>李有行</strong>的胞弟，兄弟年龄相差八岁。三兄弟中，他排行最小，却胆魄最大——少年时代私自离家，独闯南洋，归国后又秘密前往杭州笕桥考入中央航空学校，成为中国第一代战斗机飞行员。</p>
-      <p>淞沪会战爆发时，他所在部队几乎全员出击，一战再战，人机俱损。<strong>1937年9月18日</strong>，九一八事变六周年纪念日，他参加了空军对上海日军的中秋夜袭行动。驾驶着一架性能落后于日军的霍克III型双翼战机，轰炸停泊于黄浦江上的日军旗舰，被密集高炮击中，壮烈殉国。</p>
-      <p>没有留下孩子，殉国时年仅二十四岁。二哥李有行赶赴南京收拾他的遗物，连一件表明他曾有过恋爱的遗物，都没有找到。</p>
+      <p>淞沪会战爆发时，他所在部队几乎全员出击，一战再战，奋不顾身。<strong>1937年9月18日</strong>，九一八事变六周年纪念日，空军发动“中秋夜攻势”袭击轰炸占领上海的日军。他驾驶着一架性能落后于日军战机的霍克III型双翼战机，轰炸停泊于黄浦江上的日军旗舰，被密集高炮击中，壮烈殉国。</p>
+      <p>他没有留下孩子，殉国时年仅二十四岁。二哥李有行赶赴南京收拾他的遗物，连一件表明他曾有过恋爱的物件，都没有找到。</p>
     </div>
   </div>
 </section>
@@ -565,7 +577,7 @@ hr.ornament {
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-title">生于北平武定候西口外38号</div>
-          <div class="tl-desc">父亲李白民在北京任职，三兄弟均在北平长大。他比二哥李有行小八岁，从小由二哥一以代父，带他走遍香山、玉泉山。</div>
+          <div class="tl-desc">父亲李白民在北京任职，三兄弟均在北平长大。他比二哥李有行小八岁，情同手足。二哥带他走遍香山和玉泉山。</div>
         </div>
       </div>
       <div class="tl-item">
@@ -573,7 +585,7 @@ hr.ornament {
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-title">入读香山慈幼院，学会滑冰翻墙</div>
-          <div class="tl-desc">二哥李有行安排他在香山慈幼院附学。每逢周日，二哥骑车前来探望，他会老远跑出来相迎，带二哥四处参观。</div>
+          <div class="tl-desc">父亲安排他在香山慈幼院就读。每逢周日，二哥骑车前来探望，他会老远跑出来相迎，带二哥四处参观。</div>
         </div>
       </div>
       <div class="tl-item">
@@ -589,7 +601,7 @@ hr.ornament {
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-title">秘赴杭州笕桥，考入中央航空学校</div>
-          <div class="tl-desc">杭州笕桥中央航校是当时中国唯一的正规航空学校。他瞒着家人报考，以第五期乙班学员身份入学，开始了飞行生涯。</div>
+          <div class="tl-desc">杭州笕桥中央航校是当时中国唯一的正规航空学校。他瞒着家人报考，以第五期乙班学员身份入学，开始了军旅生涯。</div>
         </div>
       </div>
       <div class="tl-item">
@@ -628,7 +640,11 @@ hr.ornament {
     <div class="battle">
       <div class="battle-eyebrow">台湾忠烈祠存档 · 淞沪会战空军作战纪实</div>
       <div class="battle-title">九月十八日中秋夜袭</div>
-      <img src="images/hawk-iii-aircraft.webp" alt="霍克III机型" class="content-img" loading="lazy">
+      <video controls playsinline preload="metadata" poster="images/hawk-iii-aircraft.webp" class="content-video">
+        <source src="video/early-airforce-footage.mp4" type="video/mp4">
+        您的浏览器不支持播放此视频，可<a href="video/early-airforce-footage.mp4" style="color:var(--gold-pale);">点击下载观看</a>。
+      </video>
+      <p class="content-video-cap">中国空军早期真实影像</p>
       <div class="battle-text">
         <p>1937年9月17日，蒋夫人宋美龄对航空委员会将校们说：<strong>"将军们，不用说您们也知道明天是什么日子，九一八事变六周年了。为了雪洗国耻，委员长命令空军给日军以最大的打击……"</strong></p>
         <p>九月十八日，恰逢农历八月十五日中秋节。驻守南京的东北籍飞行员六年来每逢"九一八"绝食一天，此时接到命令，下了必死的决心，由晚打到早，轮番飞往上海。</p>
@@ -639,7 +655,7 @@ hr.ornament {
     </div>
     <div class="prose">
       <p>《中央航空学校第五期航空班学生名册》红色标注的殉国者名单中，有他的名字，记录为：<strong>"1937/9 炸招商中栈至汇山码头阵地炮火击中殉国"</strong>。</p>
-      <p>当年第五期乙班，飞行专业学生全部阵亡。中国第一代空军飞行员，1942年之前升空迎战者几乎全灭，殉国平均年龄二十三岁。他们驾驶着性能远落后于日军的老式飞机，以血肉之躯，以一死换取时间。</p>
+      <p>当年第五期乙班，飞行专业学生全部阵亡。中国第一代空军飞行员，1942年之前升空迎战者全部阵亡，殉国平均年龄二十三岁。他们驾驶着性能远落后于日军的老式飞机，以血肉之躯，以一死换取时间。</p>
     </div>
   </div>
 </section>
@@ -680,14 +696,14 @@ hr.ornament {
     <span class="eyebrow">纪念场所</span>
     <h2 class="section-title">两岸，都有人在怀念</h2>
     <div class="prose" style="margin-bottom: 32px;">
-      <p>李有幹在两处官方场所被永久纪念。他的长孙李兆庆（编者）曾带领全家前往南京祭扫，并写道：<em>"海峡两岸都有人在怀念着你和你的队友们。"</em></p>
+      <p>李有幹在两处官方场所被永久纪念。他的侄长孙李兆庆曾带领全家前往南京祭扫，并写道：<em>"海峡两岸都有人在怀念着你和你的队友们。"</em></p>
     </div>
     <div class="sites-grid">
       <div class="site-block">
         <img src="images/nanjing-museum-building.webp" alt="南京抗日航空烈士纪念馆" class="site-img" loading="lazy">
         <div class="site-block-name">南京抗日航空烈士纪念馆</div>
         <div class="site-block-loc">南京紫金山北麓</div>
-        <div class="site-block-desc">始建于1932年，历经战火与浩劫，数度重修。纪念馆内镌刻4296名中外抗日航空烈士英名。李有幹在此设有卧碑（衣冠冢），其戎装照亦在馆内展出。全家曾来此祭扫。</div>
+        <div class="site-block-desc">始建于1932年，历经战火与浩劫，数度重修。纪念馆内镌刻4296名中外抗日航空烈士英名。李有幹在此设有卧碑（衣冠冢），其戎装照亦在馆内展出。</div>
         <div class="epitaph-box">
           <div class="epitaph-label">卧碑铭文</div>
           <div class="epitaph-text">烈士四川江油人，中央航校五期乙班毕业，任空军四大队二十二队飞行员，一九三七年九月十八日夜袭上海汇山码头日军，被敌高炮击中阵亡。追赠中尉。</div>
@@ -713,8 +729,8 @@ hr.ornament {
     <span class="eyebrow">家族背景</span>
     <h2 class="section-title">梓潼双板李氏三兄弟</h2>
     <div class="prose">
-      <p>四川梓潼双板乡李氏，移居北平的第二代，据李有行日记所述，三兄弟全是"叛逆胚子"。大哥李有度，五四青年，北大西语系学生，成天上街游行；二哥李有行，不肯从商，执意学画，远赴法国里昂美术学院，没赶上父亲的最后一面；小弟李有幹，叛逆劲头"后来者居上"——偷钱下南洋、秘密报考航校，每一件大事都不是先斩后奏，而是只斩不奏。幸而先于小儿子“闯祸”之年闭上双眼。</p>
-      <p>父亲李白民早逝，没有见到小儿子成为战斗机飞行员的那一天。二哥李有行对他<strong>以兄代父</strong>，一手抚育，一手牵着他在香山赏雪，在玉泉山辨认农作物，背他走过西直门外的黑暗。所以当噩耗传来，二哥是李有幹在这个世上最悲痛的人。</p>
+      <p>四川梓潼双板乡李氏，移居北平的第二代，据李有行日记所述，三兄弟全是"叛逆胚子"。大哥李有度，五四青年，北大西语系学生，成天上街游行；二哥李有行，不肯从商，执意学画，远赴法国里昂美术学院，没赶上父亲的最后一面；小弟李有幹，叛逆劲头"后来者居上"——偷钱下南洋、秘密报考航校，每一件大事都不是先斩后奏，而是只斩不奏。太祖李白民幸而先于小儿子“闯祸”之年闭上双眼。</p>
+      <p>父亲李白民早逝，没有见到小儿子成为战斗机飞行员的那一天。二哥李有行情同手足，带他在香山赏雪，在玉泉山辨认农作物，背他走过西直门外的黑暗。所以当噩耗传来，二哥是李有幹在这个世上最悲痛的人。</p>
       <p>李有行后来在那本亲手为弟弟制作的相册上，亲笔写下：<strong>"纪念亡弟群翼"</strong>。群翼，是李有幹的字。那本相册，毁于1966年的抄家浩劫，那些戎装照，再也看不到了。</p>
     </div>
   </div>

@@ -117,6 +117,16 @@ nav {
   border: 1px solid rgba(201,148,58,0.2);
   margin: 16px 0;
 }
+.content-video {
+  width: 100%; border-radius: 4px;
+  border: 1px solid rgba(201,148,58,0.2);
+  margin: 16px 0; background: #000; display: block;
+}
+.content-video-cap {
+  font-size: 12px; color: var(--silver); text-align: center;
+  margin: -8px 0 16px; font-family: 'Lora', serif; font-style: italic;
+  letter-spacing: 0.02em;
+}
 .site-img {
   width: 100%; height: 220px; object-fit: cover;
   border-radius: 2px; margin-bottom: 16px;
@@ -285,14 +295,15 @@ hr.ornament {
 /* ─── TIMELINE ─── */
 .timeline { margin: 40px 0; }
 .tl-item {
-  display: grid; 
-  grid-template-columns: 100px 1fr; /* 修改此处：拓宽左侧列宽，给日期文字更多空间 */
-  gap: 30px; margin-bottom: 0;
+  display: grid;
+  grid-template-columns: 100px 20px 1fr;
+  column-gap: 14px;
+  margin-bottom: 0;
   position: relative;
 }
 .tl-item::after {
   content: '';
-  position: absolute; left: 115px; top: 24px; bottom: -1px; /* 修改此处：轴线向右偏移 */
+  position: absolute; left: 127px; top: 24px; bottom: -1px;
   width: 1px; background: rgba(201,148,58,0.15);
 }
 .tl-item:last-child::after { display: none; }
@@ -302,13 +313,13 @@ hr.ornament {
   padding-top: 4px; line-height: 1.4;
 }
 .tl-dot {
-  position: absolute; left: 110px; top: 7px; /* 修改此处：时间轴圆点跟随向右移位 */
   width: 11px; height: 11px; border-radius: 50%;
   background: var(--night); border: 1.5px solid var(--gold);
+  justify-self: center; margin-top: 7px;
 }
 .tl-dot.red { border-color: var(--red-bright); }
 .tl-body {
-  padding: 0 0 32px 0; /* 修改此处：修复内间距 */
+  padding: 0 0 32px 0;
 }
 .tl-title {
   font-size: 14px; font-weight: 500; color: var(--white);
@@ -460,9 +471,8 @@ hr.ornament {
 /* ─── SMALL-SCREEN REFINEMENTS ─── */
 @media (max-width: 460px) { .nav-title { display: none; } }
 @media (max-width: 400px) {
-  .tl-item { grid-template-columns: 66px 1fr; gap: 16px; }
+  .tl-item { grid-template-columns: 64px 16px 1fr; column-gap: 10px; }
   .tl-item::after { left: 82px; }
-  .tl-dot { left: 77px; }
   .battle { padding: 24px 18px; }
   .diary { padding: 28px 20px; }
   .hero { padding: 72px 5vw 50px; }
@@ -470,6 +480,7 @@ hr.ornament {
 @media (max-width: 600px) {
   section { padding: 60px 5vw; }
   .mourning { padding: 60px 5vw 80px; }
+  .hero-scroll { position: static; margin-top: 36px; transform: none; }
 }
 @media (max-height: 480px) and (orientation: landscape) {
   .hero { min-height: auto; padding: 90px 6vw 40px; }
@@ -555,7 +566,7 @@ hr.ornament {
     </div>
     <div class="prose">
       <p>Li Yougan was the younger brother of <strong>Li Youxing</strong>, the noted painter, art educator, and founder of the Sichuan Fine Arts Institute — eight years his senior. Youngest of three brothers, he was also the boldest: as a teenager he ran off alone to Southeast Asia, and later secretly travelled to Jianqiao, Hangzhou, to sit the entrance exam for the Central Aviation School, becoming one of China's first fighter pilots.</p>
-      <p>When the Battle of Shanghai broke out, his unit flew sortie after sortie until men and machines alike were spent. On <strong>September 18, 1937</strong> — the sixth anniversary of the Mukden Incident — he took part in a Mid-Autumn night raid on Japanese forces in Shanghai. Flying a Hawk III biplane already obsolete against Japanese defenses, he attacked an enemy flagship anchored on the Huangpu River and was struck down by concentrated anti-aircraft fire.</p>
+      <p>When the Battle of Shanghai broke out, his unit flew sortie after sortie, fearless and undaunted. On <strong>September 18, 1937</strong> — the sixth anniversary of the Mukden Incident — the Air Force launched the "Mid-Autumn Night Offensive" against Japanese forces occupying Shanghai. Flying a Hawk III biplane already obsolete against Japanese defenses, he attacked an enemy flagship anchored on the Huangpu River and was struck down by concentrated anti-aircraft fire.</p>
       <p>He left no children. He was twenty-four. His brother Li Youxing travelled to Nanjing to gather his belongings, and among them found nothing — not even a photograph — to suggest he had ever been in love.</p>
     </div>
   </div>
@@ -572,7 +583,7 @@ hr.ornament {
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-title">Born at No. 38 Wuding Hou Xikouwai, Beiping</div>
-          <div class="tl-desc">His father Li Baimin worked in Beijing, and all three brothers grew up there. Eight years younger than his second brother Li Youxing, he was raised largely under his brother's care, taken on walks through Fragrant Hills and Jade Spring Hill.</div>
+          <div class="tl-desc">His father Li Baimin worked in Beijing, and all three brothers grew up there. Eight years younger than his second brother Li Youxing, the two were close as brothers, taken on walks through Fragrant Hills and Jade Spring Hill.</div>
         </div>
       </div>
       <div class="tl-item">
@@ -580,7 +591,7 @@ hr.ornament {
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-title">Enrolled at the Fragrant Hills Charity School</div>
-          <div class="tl-desc">His brother arranged for him to board there. Every Sunday, when Li Youxing cycled out to visit, he would run out to meet him and show him around.</div>
+          <div class="tl-desc">His father arranged for him to board there. Every Sunday, when Li Youxing cycled out to visit, he would run out to meet him and show him around.</div>
         </div>
       </div>
       <div class="tl-item">
@@ -596,7 +607,7 @@ hr.ornament {
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-title">Secretly sat the entrance exam at Jianqiao, Hangzhou</div>
-          <div class="tl-desc">The Central Aviation School at Jianqiao was then China's only formal aviation academy. He applied without telling the family, and entered as a cadet of the 5th Class, Section B, beginning his career as a pilot.</div>
+          <div class="tl-desc">The Central Aviation School at Jianqiao was then China's only formal aviation academy. He applied without telling the family, and entered as a cadet of the 5th Class, Section B, beginning his military career.</div>
         </div>
       </div>
       <div class="tl-item">
@@ -635,7 +646,11 @@ hr.ornament {
     <div class="battle">
       <div class="battle-eyebrow">From the Taiwan Martyrs' Shrine archive · Air Force combat record, Battle of Shanghai</div>
       <div class="battle-title">The Mid-Autumn Night Raid, September 18</div>
-      <img src="images/hawk-iii-aircraft.webp" alt="Hawk III biplane" class="content-img" loading="lazy">
+      <video controls playsinline preload="metadata" poster="images/hawk-iii-aircraft.webp" class="content-video">
+        <source src="video/early-airforce-footage.mp4" type="video/mp4">
+        Your browser does not support video playback. <a href="video/early-airforce-footage.mp4" style="color:var(--gold-pale);">Download to watch</a>.
+      </video>
+      <p class="content-video-cap">Authentic footage of China's early Air Force</p>
       <div class="battle-text">
         <p>On September 17, 1937, Madame Chiang Kai-shek told the officers of the Aeronautical Commission: <strong>"Gentlemen, you need not be told what tomorrow is. It is the sixth anniversary of the Mukden Incident. To wash away that shame, the Generalissimo orders the Air Force to strike the enemy its hardest blow…"</strong></p>
         <p>September 18 fell, that year, on the Mid-Autumn Festival. Pilots stationed in Nanjing who had fasted every September 18 for six years in memory of national humiliation now received their orders — and resolved to fight through the night, wave after wave, toward Shanghai.</p>
@@ -646,7 +661,7 @@ hr.ornament {
     </div>
     <div class="prose">
       <p>His name appears, marked in red for the fallen, on the roll of the Central Aviation School's 5th Class: <strong>"September 1937 — killed by anti-aircraft fire while bombing Japanese positions at Huishan Wharf."</strong></p>
-      <p>Every flight-track cadet of that class died in service. China's first generation of fighter pilots very nearly ceased to exist before 1942 — flying aircraft far outmatched by the enemy's, they traded their lives, on average at twenty-three, simply to buy their country time.</p>
+      <p>Every flight-track cadet of that class died in service. Every one of China's first-generation fighter pilots who took to the skies before 1942 was killed in action — flying aircraft far outmatched by the enemy's, they traded their lives, on average at twenty-three, simply to buy their country time.</p>
     </div>
   </div>
 </section>
@@ -721,7 +736,7 @@ hr.ornament {
     <h2 class="section-title">Three Brothers of the Li Family, Shuangban, Zitong</h2>
     <div class="prose">
       <p>The Li family of Shuangban, Zitong, Sichuan, had by the second generation moved to Beiping — and, by Li Youxing's own account, all three brothers were "rebels at heart." The eldest, Li Youdu, was a May Fourth-era student at Peking University's English department who marched in the streets rather than study. The second, Li Youxing, refused to go into business as his father wished, insisted on painting instead, and travelled all the way to the Lyon art school in France — arriving too late to see his father one last time. The youngest, Li Yougan, outdid them both: stealing away to Southeast Asia, secretly enrolling at the aviation academy — each defining act of his life was done first and explained never. Fortunately, their father closed his eyes before living to see his youngest son's escapades.</p>
-      <p>Their father, Li Baimin, died young and never saw his youngest son become a fighter pilot. Li Youxing raised him, in effect, as a father would — walking him through snow at Fragrant Hills, naming crops for him at Jade Spring Hill, carrying him home through the dark outside Xizhi Gate. So when the news of his death came, it was Li Youxing who grieved most in all the world.</p>
+      <p>Their father, Li Baimin, died young and never saw his youngest son become a fighter pilot. Li Youxing was close to him as only brothers can be — walking him through snow at Fragrant Hills, naming crops for him at Jade Spring Hill, carrying him home through the dark outside Xizhi Gate. So when the news of his death came, it was Li Youxing who grieved most in all the world.</p>
       <p>On the album he made by hand for his brother, Li Youxing later wrote, in his own hand: <strong>"In memory of my lost brother, Qunyi"</strong> — Qunyi being Li Yougan's courtesy name. That album was destroyed in the raids of 1966. The uniformed photographs it held have never been seen again.</p>
     </div>
   </div>
