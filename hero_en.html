@@ -217,12 +217,14 @@ nav {
 
 .hero-scroll {
   position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
   font-size: 10px; letter-spacing: 0.2em; color: var(--gold-dim);
+  text-align: center;
   opacity: 0; animation: riseIn 1s 1.8s forwards;
 }
+.hero-scroll span { display: block; }
 .scroll-bar {
   width: 1px; height: 36px; background: var(--gold-dim);
+  margin: 8px auto 0;
   animation: pulse 2.4s 2s infinite;
 }
 
@@ -379,11 +381,60 @@ hr.ornament {
 }
 .diary-text p { margin-bottom: 18px; }
 .diary-text p:last-child { margin-bottom: 0; }
+.diary-text h2 {
+  font-size: 15px; font-weight: 600; color: var(--gold-pale);
+  letter-spacing: 0.04em; margin: 30px 0 14px;
+}
+.diary-text h2:first-child { margin-top: 0; }
+.diary-text blockquote.excerpt {
+  background: rgba(8,12,18,0.35); border-left: 2px solid var(--gold-dim);
+  padding: 14px 18px; margin: 16px 0; border-radius: 0 2px 2px 0;
+  font-size: 13.5px; line-height: 1.95;
+}
+.diary-text blockquote.excerpt p { margin-bottom: 0; }
 .diary-sig {
   margin-top: 20px; text-align: right;
   font-family: 'Lora', serif; font-style: italic;
   font-size: 13px; color: var(--gold-dim);
 }
+.diary-note {
+  font-family: 'Lora', serif; font-style: italic; font-size: 12px;
+  color: var(--silver); opacity: 0.75; margin-bottom: 14px;
+}
+.diary-toggle {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; background: rgba(201,148,58,0.06);
+  border: 1px solid rgba(201,148,58,0.25); border-radius: 2px;
+  cursor: pointer; padding: 13px 18px; margin-top: 8px;
+  font-family: 'Noto Serif SC', serif; font-size: 13px; color: var(--gold-pale);
+  letter-spacing: 0.04em; transition: background 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.diary-toggle:hover { background: rgba(201,148,58,0.1); border-color: var(--gold); }
+.diary-toggle-icon {
+  width: 15px; height: 15px; flex-shrink: 0; position: relative;
+  transition: transform 0.35s ease;
+}
+.diary-toggle-icon::before, .diary-toggle-icon::after {
+  content: ''; position: absolute; background: var(--gold-pale);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.diary-toggle-icon::before { width: 15px; height: 1px; }
+.diary-toggle-icon::after { width: 1px; height: 15px; transition: opacity 0.3s; }
+.diary-toggle.open .diary-toggle-icon::after { opacity: 0; }
+.diary-scroll {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s ease, margin-top 0.5s ease;
+}
+.diary-scroll.open {
+  max-height: 62vh; overflow-y: auto;
+  margin-top: 22px; padding-right: 16px;
+  scrollbar-width: thin; scrollbar-color: rgba(201,148,58,0.4) rgba(255,255,255,0.04);
+}
+.diary-scroll.open::-webkit-scrollbar { width: 6px; }
+.diary-scroll.open::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 3px; }
+.diary-scroll.open::-webkit-scrollbar-thumb { background: rgba(201,148,58,0.4); border-radius: 3px; }
+.diary-scroll.open::-webkit-scrollbar-thumb:hover { background: rgba(201,148,58,0.6); }
 
 /* ─── MEMORIAL SITES ─── */
 .sites-grid {
@@ -488,6 +539,7 @@ hr.ornament {
 }
 .article-list a { display: inline-block; padding: 4px 0; }
 </style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 </head>
 <body>
 
@@ -646,7 +698,7 @@ hr.ornament {
     <div class="battle">
       <div class="battle-eyebrow">From the Taiwan Martyrs' Shrine archive · Air Force combat record, Battle of Shanghai</div>
       <div class="battle-title">The Mid-Autumn Night Raid, September 18</div>
-      <video controls playsinline preload="metadata" poster="images/hawk-iii-aircraft.webp" class="content-video">
+      <video controls playsinline preload="metadata" poster="images/early-airforce-footage.webp" class="content-video">
         <source src="video/early-airforce-footage.mp4" type="video/mp4">
         Your browser does not support video playback. <a href="video/early-airforce-footage.mp4" style="color:var(--gold-pale);">Download to watch</a>.
       </video>
@@ -660,7 +712,6 @@ hr.ornament {
       </div>
     </div>
     <div class="prose">
-      <p>His name appears, marked in red for the fallen, on the roll of the Central Aviation School's 5th Class: <strong>"September 1937 — killed by anti-aircraft fire while bombing Japanese positions at Huishan Wharf."</strong></p>
       <p>Every flight-track cadet of that class died in service. Every one of China's first-generation fighter pilots who took to the skies before 1942 was killed in action — flying aircraft far outmatched by the enemy's, they traded their lives, on average at twenty-three, simply to buy their country time.</p>
     </div>
   </div>
@@ -670,25 +721,62 @@ hr.ornament {
 <section style="padding: 60px 6vw;">
   <div class="section-inner reveal">
     <span class="eyebrow">A Brother's Grief</span>
-    <h2 class="section-title">From "In Memory of Yougan"</h2>
+    <h2 class="section-title">"In Memory of Yougan" — Complete Text</h2>
     <div class="prose" style="margin-bottom: 24px;">
-      <p>Three months after Li Yougan's death, his brother Li Youxing — then travelling south to relocate his art school inland — stopped in Changde, Hunan, and wrote a long memoir, <em>In Memory of Yougan</em> (《忆幹弟》). It remains the only sustained written record of Li Yougan's life, and one of the family's most treasured possessions.</p>
+      <p>Three months after Li Yougan's death, his brother Li Youxing — then travelling south to relocate his art school inland — stopped in Changde, Hunan, and wrote a long memoir, <em>In Memory of Yougan</em> (《忆幹弟》). It remains the only sustained written record of Li Yougan's life, and one of the family's most treasured possessions. The full text (approximately 7,000 Chinese characters) is presented below.</p>
     </div>
-    <div class="diary">
+<div class="diary">
       <div class="diary-meta">Li Youxing · December 22, 1937 · Wuling Garden, Changde, Hunan</div>
-      <div class="diary-text">
-        <p><strong>Chapter One — Brothers (excerpt)</strong></p>
-        <p>I loved my brother's courage, his warmth, his high spirits — and I loved even his recklessness. Oh, my dearest Yougan, when shall we meet again?</p>
-        <p>… I took him to Fragrant Hills. I covered him with my own coat as he fell asleep, contented, and found in his peaceful face a great comfort. He never once blamed me for the hardship, only thanked me for the outing. My brother was truly brave.</p>
-        <p><strong>Chapter Three — Eternal Skies, Blue Blood (excerpt)</strong></p>
-        <p>… the messenger reached the door and announced, in a loud voice, that this man had died in battle over Shanghai on the night of the eighteenth.</p>
-        <p>I went cold all over, and fell silent, not knowing whether to believe it. … In a low voice I admitted to myself: the news was almost certainly true. A man's name is not so easily mistaken.</p>
-        <p>… Soldiers who had known him, seeing the likeness in my face, watched me with quiet sorrow. They all said he had been good-natured, open-hearted — what a pity, they said, what a pity.</p>
-        <p>… My eyes too full of tears to see clearly, I sorted through his scattered belongings. I found his spare dental plate. I gathered a small packet of loose photographs to keep…</p>
-        <p><strong>Oh, my dear brother — I loved you so, and this is how you were lost to me. When victory comes, I will go to the banks of the Huangpu, to Yangshupu Wharf, and pour libations for your loyal soul.</strong></p>
+      <button class="diary-toggle" id="diaryToggle" aria-expanded="false" aria-controls="diaryScroll">
+        <span>Click to read the full text of "In Memory of Yougan"</span>
+        <span class="diary-toggle-icon"></span>
+      </button>
+      <div class="diary-scroll" id="diaryScroll">
+        <p class="diary-note">The full text below is presented in the original Chinese; an English translation is planned for a future update.</p>
+        <div class="diary-text">
+          <p>我爱幹弟的勇敢、我爱幹弟的豪爽、我爱幹弟的兴致、我爱幹弟的伤亡！呵，我最可爱的幹弟，我和你何时再见啊！</p>
+          <p>我要表现我是如何热诚地爱他，于是我带他一同去照相，带他到东交民巷去看那些整洁的道路，希奇的洋人，美丽的洋房，还带他去看那雄伟的城楼和沿城走着的火车，尽我所知的讲解给他听，当我看出他那兴奋好奇的神情，我亦快活起来。</p>
+          <p>我还带他到香山慈幼院去，一则看山景，再则参观慈幼院的环境如何美好，那是颇值得纪念的一次远足，我们动身太迟了，吃过午饭已是过午两点，又是阴历年头上，天黑得极早，我鼓舞着他的勇气居然走到玉泉山，看他实在疲倦了我就背他一段又讲些鼓励他的话，甚至搜索枯肠找些故事讲给他听，终于爬上香山看见了慈幼院，随后一切都消逝在昏暗中了。我们唱着歌说着话，相互提携着快一阵慢一阵地走回城去，在海甸还买了几个烧饼分着边吃边走，他不喊冷也不说累，当走到西直门时已近午夜，城门早已关闭，只好进到城外驻警的小屋内等待天亮开门。我脱下外衣给他盖好，他满面兴致地熟睡了，我从他那满足的神情中得到了极大安慰，事后我自怨不该使八九岁的他受那样的辛苦，但是他除去感激我引导他游玩之外绝无丝毫怪我令他吃苦之意，幹弟可谓勇了！</p>
+          <p>夏日早晨，我每每出城散步回来才去上学，暑假中更是天天清晨出城，幹弟一次自告奋勇陪我出城，沿途听我讲那些农作物，和我一起偷吃过一些黄瓜白薯，经钓鱼台罗道庄绕至八里庄返城，路过倒影庙我就带他去见哈尔定先生，得到桃子吃他就满意极了，我亦快活之至，其后我们每借口去月坛买菜出城去玩。</p>
+          <p>记得一次父亲发现丢了什么东西，把幹弟和外甥曾学广罚跪着审问，过是幹弟犯的，享受却是两人与共，我外甥吃不住罚就供出了是幹弟所为，父亲狠狠将幹弟鞭责一顿，不给吃饭穿衣，还须照旧写字念书，幹弟吃得起苦，他不求饶不求情，更不呜咽，我看着大为不平，一面去将外甥责备一番，一面去幹弟屋里陪他受罚，苦劝他改过，甚至哭着告诉他我幼时犯过与他相似的过，受过相似的罚，他亦似稍稍动容，但随着就不介意了，待我再去看他时，他并未写字读书，却专心一意的在画静物写生！我当时多么佩服他、敬爱他呀！他多么兴致，多么洒脱啊！他绝不怪外甥不义，他能独做独当，不再同外甥共同犯事，外甥颇知改过，从此像大人却亦更像外人了。我怂恿着把幹弟送往香山慈幼院去附学，父亲勉强答应了，我为建议成功而高兴，幹弟更是说不尽的快活，几乎每个星期日我都骑车去看他，他望见我的时候真像久别重逢的情人一样老远跑过来接我，引我去看东看西，介绍的他同学和老师，若是我要作画，他就情愿为我拿水盂，一次我去画雪景，他不仅不嫌手冷还满面荣光，满面兴致！在香山他学会了滑冰、翻墙，爬树这类山野小孩的本领，尤其是滑冰成绩最好！</p>
+          <p>一年深秋，慈幼院开恳亲会，父母亲和我应邀上山赴会，那亦是我家庭中最少有的一次短途旅行吧，我是这次旅行的促成者，同时又是向导者，感到了特别的快乐！香山园，碧云寺，游后就去了慈幼院，父母兄弟聚坐在一起，亲其所亲的纯爱，相互的心灵感应，真是我此生最宝贵的一段回忆了，我们住香山一宿，次日下午才返回城内。</p>
+          <p>中间有七八年，我和幹弟分别了，当我将从美专毕业，为着争取出国努力时常常和父亲意见相左，每每冲突到挨打哭闹，幹弟似乎不了解这事情，直到我争得父亲所给的旅费，即日登程远行之时，幹弟才有暗中羡慕我离家的神情，我们没有留恋不舍的情意，这大概就是兄弟之爱的界限吧！从此之后偶尔通信几次而已。</p>
+          <p>父亲去世我赶回奔丧的那年夏天，只感到幹弟长大成人了，同时似乎手足无措，对我生疏了，我们短暂相处便又分离，一去三年，其间幹弟竟远走南洋历练一次归来。</p>
+          <p>这是由大哥来信和回家后听母亲讲的：大约是民国十八年的事情，那时家中只母亲幹弟两人，幹弟一向对读书缺乏兴味，父亲去世后他爱玩起来就更是没有忌惮了，特别喜爱运动和游戏，偶尔作画成绩亦颇可观，这年忽发奇想，利用母亲出门的空隙，将家中活期存折窃到手，母亲归来还看见他正在规规矩矩的写字，写完字他向母亲说去看同学某人，殊不知此一去就不见回来，母亲知道有异，往寻存折果然不见，一时急得无法，四处托人寻访都称不知，一方面痛惜失去存款，另方面更悬心他勿因此钱送命，焦心积虑两月余才接他由新加坡寄回家信，称他和一同学赴南洋谋生，沿途平安，现抵达新埠尚无正式工作。</p>
+          <p>原来他早图谋离家自立，耳闻某同学亲戚在南洋麻坡有橡胶园，其同学仅能介绍工作，幹弟求自立心切，便慨然愿意承担两人路费，共同计议停当，居然一切顺利到达目的，但带出的七百余元已全耗尽，而且当时南洋橡胶工业因世界金融危机而衰败。同学的亲戚力劝他二人返家，那位同学果然自行回国了，而幹弟犹苦撑半年之久。每天正式工作两三小时，收入不足饮食之用，只得另做厨役洗衣等工才勉强维生。其后又教读国语数月，生活才略轻松一些，但是他确信此处前途有限才领取家中设法寄往的路费返家。</p>
+          <p>幹弟这番冒险旅行对母亲自是忍心太甚，但对他自己确有许多好处，第一身体炼得强实了，知道自立谋生的困难，晓得人言的不可靠，经历种种人情世故还在其次了，胆量更大眼光更广亦是附带的收获。</p>
+          <p>民国二十年我同涤玄返国回家，不久又南去上海就职仍少与幹弟往来，仅知他自南洋归来肯继续求学令人安心罢了。</p>
+          <p>二十二年春他陪同母亲到上海看擎儿（笔者）我们勉强着想回复从前的亲热，竟似极不自然了，他先母亲回平，母亲不放心他一人在家，怕又生变就也匆匆赶了回去，当年夏他考航空学校去杭州复试，经上海小住我处，当他从杭州返回上海时那付沮丧面色令我代他难过，竟因眼睛可疑而落选了！他当时就表示决不放弃，下次再去应试，那种自信的态度又使我油然起敬！我劝他不妨去南京投考高射炮班，因为志不在彼，又不愿违我好意，只好枉费了一次往返。</p>
+          <p>在他等候年假招考期间，一心注意养息眼睛就很少留心功课了，我不免每每去责怪他，但事后又自悔多言，幹弟若不是那样嬉戏终日，他的身体定会因忧虑而衰退呢，当他为别人操劳时，又是勇敢负责到底，忘记养息眼睛了！</p>
+          <p>果然这一次天从人愿，他考入了航校，我们的喜乐及不得他那兴奋的万分之一呢！他得意极了，说笑整日不闭嘴赖以打破寂寞，他一去之后，我即刻爱他更甚于昔了，他仍然不失天真，我自豪有这样可爱的弟弟。</p>
+          <p>六个月军训入伍期限很快过去，幹弟及他的一个同伴蓦地出现在上海嵩山路戴家客厅，我简直惊喜万分，入伍期满的他像是铸就的英雄模型，神采奕奕，光耀眩人，好气慨呵！我那时客居友人家中无法尽情招呼他，无法尽情表现对他的挚爱，使我感愧欲泪，而他仍然笑容可掬，天真对人，送他走后我心中不免悒悒多日，难以入睡。</p>
+          <p>那是二十四年初春吧，幹弟练习长途飞行途经上海，电话招我去虹桥机场会晤，我当时唯恐错失机会，草草吃饭骑车直奔虹桥，觉得顶头逆风有意苦我，路又似较想象中远出数倍，但不敢稍懈的努力奔去终于到达机场门首，忙询问守兵飞机尚在场否？荅以尚在，于是才心安称快，通报后只见一飞行员出迎，稍近才认出即我幹弟，嘴中饮食尚在咀嚼中呢！我在接待室候他吃过饭便引我看视他们一行的飞机，一共十架排列极整齐，就是各省市祝蒋寿所献的飞机，不久命令到了，他首先起飞，这原是见过的事，此处都感觉完全两样，只因驾机者乃我爱弟也，他起飞绕场到我头上时招手再三而去，我在归途中一味回忆着那身穿飞行厚衣毛皮领大软皮鞋的笑迎我者，和当年在香山西慈幼院见我来迎者完全合为一人！令我含笑归来，笑我有这样一个亲爱的弟弟。</p>
+          <p>二十四年冬大概是十月里，他们第五期学生毕业了，幹弟最初希望母亲，大哥大嫂能去杭州参加恳亲会，母亲因在去冬半身不遂不能受此长途旅程，大哥大嫂也因此兴致减退，他们将请帖转寄给我代表出席，幹弟只好将希望降低至我同涤玄携擎儿前往，惜临行擎儿又发寒热，拖住涤玄亦不能去，我在杭州车站出口处正遇幹弟来迎，他真有点失望呢！除了一个二哥认识他的光荣，其余亲人都未曾眼见呀！他陪我送东西到刘开渠先生处，然后招待我入住旅舍登记、领证章、礼物、纪念照像、领旅费等等，他仍然抱希望涤玄能抱擎儿突然来临呢！</p>
+          <p>次日早晨我随其他毕业生家属乘航校备车直赴校舍步至观礼台站定，就见所有毕业生前来亲其所亲！幹弟到我面前将涤玄不能来的电报递给我看，他比那一两位没有亲属来校的同学稍为宽心一些！唉！使我联想起当年赴香山恳亲会的景况是多大差别呀！幹弟成人，幹弟有最光荣的职务，但是父亲看不见了，母亲不能前来参与盛典，他今天似有感触，有孤独的感触。</p>
+          <p>他们归队去了，分别按各自的岗位前往机场待命，不久礼乐响起，蒋校长莅场，全体教职员去场口迎接，行军礼顺次步入场内，行升旗礼，校长检阅飞机及毕业生，从头至尾相互敬礼后始登检阅台，命令一下各机依次起飞，入空即消失不见，稍倾轰鸣声自远而来，机群至上空排成各种阵式，去后复返换为五字阵列，继之个别表演、战斗表演等，其后机群鱼贯着陆，礼毕各生复归引亲属各处参观，途中幹弟称五字阵中彼居中划直角之端，执旗指挥行列，惜飞行过高无从辨认了，午食后他引我去看他们的宿舍，其建筑相当简陋但极清洁整齐，后去食堂，工场，球场，游泳池等处，遇有岗位处皆有还礼必要，这些都是我前所未见的，他送我回旅舍共晚食后再去校参观夜间飞行。好美的景色！信号枪尤美，照明弹亦壮观，确是雄伟微妙的场景！</p>
+          <p>翌晨九时齐集礼堂观毕业典礼，亲属在楼上学生在楼下，前排为毕业生后排皆为在校学生，蒋校长步入时空气徒变，音乐悠扬有致直至主席等登台始止。开会行礼如仪后，蒋校长致训辞，气慨极严肃清楚，意在勉励为国效力尽军人天职，随后发给毕业证书，毕业生有致答谢辞极动听，礼毕齐赴阅兵台前摄影，午食后观球戏。少倾恳亲会开始，蒋校长谢各家长来临，各家长代表答谢演说，继乃聚餐，座次皆毕业生陪坐各生家长旁，幹弟和我亦然，蒋校长亲临各座劝饮，至幹弟前询我为彼何人，答曰：哥哥，乃向我举杯并点头说："哦！好，请多喝点酒，没有好菜！"亲切如家人，席散继之游艺会，幹弟扮演一悭吝人之子，相当吃力，演毕下台坐我旁，共观另一剧，陪我返旅舍共宿，准备明日同返上海，他将去北平省亲。</p>
+          <p>我真想同他一路回家去看看母亲，他毕业定使母亲快慰之至，我也愿见慈母喜悦神色。见我幹弟得意而使家中人个个欢欣，可惜我缺少路费终未成行，他独自回去了！</p>
+          <p>幹弟在学校除却飞行与射击两课成绩列甲等，其他课程多是勉强及格或竟有一二门不及格的，他毕业后被派往洛阳去作飞行教官，而他私自愿望是被编入空军队中，现既派定亦就受命前去任职了，在洛阳几个月功夫，两广事变有用兵趋势，杭校教官多数入队中开往湖南江西，幹弟奉命返校任教官，他每逢休假日总往我友雷圭元家去玩，他们得他解闷亦极表欢迎，他每称在雷家有如到我家一般，但雷先生夫妇又总称他客气过分，我的朋友们亦都认为他是可爱的兄弟呢！</p>
+          <p>二十五年初夏，幹弟在一次飞行训练中堕机受伤住院，令我吃惊和担心万分，待我赶到杭州医院见他伤势尚无大碍，心乃稍安，回城到雷家，而圭元兄却已到医院探视他去了，后见到开渠，风眠诸先生，均言比次可谓万幸！一以贺他，一以慰我！返滬时一路庆幸幹弟确实脱离危险，不似来时的心焦欲焚了。</p>
+          <p>夏末我决计回平就教母校，临离时幹弟又来滬就牙医并为我家送行，啊！幹弟此后你再过上海就缺少一个至亲的人，少一种慰藉了！他望着徐徐离去的列车，若不是自强，开渠在旁，他定会透出恋恋之意的！当时孙妈（笔者的奶妈，因割捨不下笔者）哭成了泪人一个，掩遮了幹弟的惜别！啊幹弟，请宽恕我，但他究竟是豪爽宽容的，反而称贺我能回平侍亲呢！好可爱的幹弟。</p>
+          <p>中秋节前他回平省视母亲，先直去顺城街家方知母亲住西山疗养，才转来西京畿道我的住处，我友薰琴夫妇及书鸿称道他的磊落气慨，我俩同乘人力车去西山，母亲细审幹弟面容，微察幹弟举止行动，知他虽历命险仍保持原有好体魄好气度，欣慰莫似，笑问他对婚事有无打算？告他多人关怀其事，询他作何感想？他亦答以狂笑而无诺言，我察他或自有主张，或有隐情，时机未到不愿告人罢了，劝母亲听他自定可也，至于我的揣测究是误会抑是果有其事，至今无以证之，啊！幹弟神秘起来了！</p>
+          <p>他自病愈后特别喜欢调制饮食，在西山益寿园住了两夜，每随涤玄赴市购鸡肉之类返舍入厨调制，母子兄弟称快一时，擎儿容儿亦得三叔如旧友亲妮无比，小住北平五六日忽接杭校电促返校，他依命南行，临别笑称若汕头事件需诉诸武力，彼决前去作战云云，啊！好勇猛的幹弟，我闻语不胜欣幸！幹弟真好男儿也！</p>
+          <p>不久之后接他来信称彼已编入空军第四大队，为二十二队队员，宿愿又以得偿！十二月西安事变突起，他来信告之曾飞往示威并在潼关以西小试作战，来信不过一二封，字字行行都是忠勇之辞。</p>
+          <p>二十六年端午节前，幹弟来电称自浦口北返，隔日夜间十一时我去前门车站接他，他除随身衣服外还带来洞庭山枇杷一篓，笑嬉如昔，见我到站相迎则倍形喜乐，母亲知他归来更是虽睡而不能眠，待我俩到家她老人家又准备起床了，只因我等劝止才又睡下，但仍笑谈过午夜才各自安歇。从此每天他都陪伴母亲片刻再出去访问旧友，下小馆打弹子，划船饮茶谈笑看电影等等。偶尔一天他独自无聊我亦空闲，就提议为他绘像，他不置可否的坐下让我潦潦草草的画出一副豪迈气慨速写，而他竟闷坐得思睡了，我深深惋惜他不识休养之重要，并责他应节省体力精神勿过分嬉戏，他谓在校每日必午睡时许，夜夜复安眠，来平所谓嬉戏消遣何至有所损伤体力？</p>
+          <p>陪他去万安公墓走到田野间，他精神抖擞的掏出手枪瞄准莽间发射两弹，两三只鹌鹑飞起惊逃了，他笑谓可惜差了一毫距离，否则便是现成下酒菜，我怪他轻于放枪唯恐招祸，他笑称不会，子弹不贵平常每每打着玩，在父墓献过花圈少留，见有雨意就匆匆搭车反城午食。隔日他便登归程了，我则因校事无法至车站送别，母亲泪流不能止，我劝她何必伤感悲别，过些日子他仍会回来探视母亲的，话虽如此，我当时亦有痛别的伤感，大半因国难日亟，他那勇猛效忠，临去不掉头的决绝神情，至今想起真像诀别之意。而就在他离去一个月，卢沟桥事起，我们也断绝了消息，母亲忧虑不已，直到病危的最后吐言仍念念幹弟不止。</p>
+          <p>安葬母亲及送别大哥大嫂，我亦准备离平，正好涤玄的大侄启元得家中允许亦决定与我结伴南行先往南京，十月二日动身，十二日晨住南京旅舍，再上街看看情况，忽然响起空袭警报，我俩由警察指示跑回旅舍，不久警报解除又使我略感失望，我们决定出中山门去总理陵园，到了那里方知因战事而封闭，不能进入了，无奈去一茶座吃面，忽而警报声再起，我俩忙忙躲入一树荫仰望空战，高射炮亦发挥了威力，南京正在表现抗击的能力，启元笑称有幹先生也许在高空作战呢？我亦笑称若果有其事我就太满意了，警报解除后我们听宪兵劝告乘车返城，当晚搬出城住六哥处（杨继曾，我妈的堂兄，抗战后期任兵工署长）六哥称幹弟不久前来访，並称曾飞往上海作战两次，留下通信处就欣然别去，现在他恐仍留南京，住陵园图书馆。</p>
+          <p>我原打算去陵园探问他的情况，六哥谈到如无凭证恐怕会有许多麻烦，因差用人持信去探，盼到过午才见送信者返回，走到门口大声报道此人已于九.一八夜阵亡于上海了。</p>
+          <p>我浑身冰冷，信疑参半的沉默下来，六哥则叱用人是否探询清楚便径自如此报告？用人称他们但问何人探询其人，队中已有通知寄往其家属，遂转身告我，其人是东北人，是先生何人？我答其人是我兄弟，北平口音被他们误认作东北人了，用人忽知被斥原因就忙着解释说当再去细细打听吧，怕是误会了。六哥，启元，亦同声说有可能误会，还是再详细打听，我低声承认噩耗的真实性极大，人的姓名是被认清的啊！</p>
+          <p>四天过后，六哥从他办公室出来，我正在他客厅里等着，他极庄重的半鞠躬向着我，低声又清晰的说："有幹阵亡了！从两处探听到的确实消息"又把手中两张便条交给我称："可以去看看他的遗物"我默不作声随六哥出城，吃过饭骑着白水桥兵工署的脚踏车前往陵园图书馆，询问二十二队所在地，闻路人言："红房顶大楼即是"，我遍觅全山不见其楼，绕过多少冤枉路找到图书馆，始知该楼顶已被涂黑，从那里问到二十二队部时警报又响，静候一时余知己近解除就赶先下山进城去，到了光华门却又转错了路，由其他队部人员指示回头走入二十二队队部，通报来意后承队中留守书记孙文诠先生殷勤接待坚请共饭，其间有熟识幹弟的士兵们见我面貌相似都随时凝视着我，现出同情惋惜神情，他们都道称幹弟和气，性情豪爽，可惜得很！二十二队全体出发去了兰州（笔者近年查阅资料推断他们系去接受苏联援华的首批新式战机）他有一部遗物在此，另有遗物尚存南昌。</p>
+          <p>我检视幹弟遗物时两眼含泪看不清楚，物事零乱无序衣服散置各箱中，忽触及一物知是他所配假齿，乃检出零散照片一小包并置，队中人称可以带去，我就放入怀中携回，其他遗物仍封存队中，辞过他们，孙先生直送我到大门郑重告别，我乘月色出城返回白水桥，道路虽好但崎岖异常，又累得大汗淋漓才返抵六哥住处，夜静了我始发现把呢帽遗在队部与幹弟遗物相伴了！</p>
+          <p>十一月十五日我因去南昌迎接圭元夫人之便，特走青云浦检视幹弟其他遗物，事有凑巧，一到南昌住入旅社便遇着空军队员李君，承他介绍往老飞机场会见关站长，探听到那里尚有二十二队留守人员，并为我接洽翌晨去青云浦新机场，隔日乘车前去，接近那里只见正有不少飞机从事习飞，啊！我若能在四个月前来此访我幹弟又该何等欢畅快活啊！他原来的住处已被炸，破乱不堪，遗物杂乱霉湿好像隔世久远了，唯有红色玲珑脚踏车斜倚在旁，还像别来不久的弃物！至于无线电收音机零件，摄影器破损镜箱更不忍触摸，还有他由北平带出的旧衣书籍，使人认物如睹人的难过，我仍是仅仅检出零星照片一包。信件三五封，带回留作纪念罢了！</p>
+          <p>百花洲畔，新旧机场，南昌车站，路旁各处都见有同幹弟当日服装相似，身材仿佛的，我能从他们中再认出一个幹弟么？</p>
+          <p>啊！我可爱的幹弟，我多么爱你这样的伤亡，胜利之后我定要去黄浦江畔，杨树浦码头奠祭你的忠魂。</p>
+                </div>
       </div>
       <div class="diary-sig">— Li Youxing, elder brother, written in the winter of 1937</div>
     </div>
+    
     <div class="prose">
       <p>This diary survived the Cultural Revolution only by chance — confiscated along with several others during a house raid, it resurfaced, almost miraculously, among a handful of "returned items" more than a decade later.</p>
       <p>Li Youxing had once made his brother a photo album by hand, filled with images of him in uniform. That album did not survive. Of Li Yougan's photographs, only three remain in the family's keeping, and none show him in uniform — a single such photograph survives only in official archives.</p>
@@ -702,7 +790,7 @@ hr.ornament {
     <span class="eyebrow">Memorial Sites</span>
     <h2 class="section-title">Remembered on Both Shores</h2>
     <div class="prose" style="margin-bottom: 32px;">
-      <p>Li Yougan is permanently commemorated at two official memorials. His great-nephew, who led the family on a pilgrimage to Nanjing, later wrote: <em>"On both shores of the strait, there are people who remember you and your comrades."</em></p>
+      <p>Li Yougan is permanently commemorated at two official memorials. His great-nephew led the family on a pilgrimage to Nanjing to pay respects.</p>
     </div>
     <div class="sites-grid">
       <div class="site-block">
@@ -711,6 +799,7 @@ hr.ornament {
         <div class="site-block-loc">Northern slope of Purple Mountain, Nanjing</div>
         <div class="site-block-desc">Founded in 1932 and rebuilt several times after war and upheaval, the memorial inscribes the names of 4,296 Chinese and allied aviation martyrs. Li Yougan has a memorial tablet here, and his uniformed portrait is on display. The family has visited to pay respects.</div>
         <div class="epitaph-box">
+          <img src="images/nanjing-woebei-inscription.webp" alt="Photograph of Li Yougan's memorial tablet inscription" class="content-img" loading="lazy" style="margin: 0 0 14px;">
           <div class="epitaph-label">Tablet inscription</div>
           <div class="epitaph-text">A native of Jiangyou, Sichuan; graduate of the Central Aviation School, 5th Class Section B; pilot of the 22nd Squadron, 4th Group; killed by anti-aircraft fire on the night of September 18, 1937, raiding Japanese forces at Huishan Wharf, Shanghai. Posthumously promoted to Lieutenant.</div>
         </div>
@@ -721,8 +810,7 @@ hr.ornament {
         <div class="site-block-loc">Yuanshan Park, Taipei</div>
         <div class="site-block-desc">The shrine honors nearly 400,000 fallen souls, each recorded by name, birth date, ancestral home, and place of death. Li Yougan's uniformed photograph and service records are held here — it was this very photograph that let the family rediscover his image as a soldier.</div>
         <div class="epitaph-box">
-          <div class="epitaph-label">Archival record</div>
-          <div class="epitaph-text">His registered address reads "No. 38 Wuding Hou Xikouwai, Beiping" — the family home of his grandfather Li Baimin, where Li Yougan was born.</div>
+          <img src="images/liyougan-uniform-portrait.webp" alt="Li Yougan in uniform" class="content-img" loading="lazy" style="margin: 0;">
         </div>
       </div>
     </div>
@@ -781,7 +869,7 @@ hr.ornament {
 <div class="family-link">
   <div class="family-link-text">
     <strong>YouXing Heritage</strong> · A Four-Generation Family Archive · youxingshijia.com<br>
-    <span style="font-size:12px;color:var(--silver);">hero.youxingshijia.com · Permanent memorial to Li Yougan · <a href="hero.html" style="color:var(--silver);">中文版</a> · <a href="hero_de.html" style="color:var(--silver);">DE</a></span>
+    <span style="font-size:12px;color:var(--silver);">hero.youxingshijia.com · Permanent memorial to Li Yougan</span>
   </div>
   <a href="https://youxingshijia.com">Main Site</a>
 </div>
@@ -827,6 +915,7 @@ const io = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.08 });
 reveals.forEach(el => io.observe(el));
+setTimeout(() => { reveals.forEach(el => el.classList.add('up')); }, 1200);
 
 /* LIGHTBOX */
 (function () {
@@ -842,6 +931,24 @@ reveals.forEach(el => io.observe(el));
   closeBtn.addEventListener('click', closeLB);
   lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB(); });
+})();
+
+/* Diary full-text expand/collapse */
+(function () {
+  const toggle = document.getElementById('diaryToggle');
+  const scroll = document.getElementById('diaryScroll');
+  if (!toggle || !scroll) return;
+  toggle.addEventListener('click', () => {
+    const isOpen = scroll.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen);
+    toggle.querySelector('span').textContent = isOpen
+      ? 'Collapse full text'
+      : 'Click to read the full text of "In Memory of Yougan"';
+    if (!isOpen) {
+      toggle.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
 })();
 </script>
 </body>
