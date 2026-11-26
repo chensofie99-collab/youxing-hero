@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Chinese Homepage -->
+  <url>
+    <loc>https://hero.youxingshijia.com/</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://hero.youxingshijia.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hero.youxingshijia.com/hero_en.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hero.youxingshijia.com/hero_de.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hero.youxingshijia.com/"/>
+  </url>
+
+  <!-- English Homepage -->
+  <url>
+    <loc>https://hero.youxingshijia.com/hero_en.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://hero.youxingshijia.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hero.youxingshijia.com/hero_en.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hero.youxingshijia.com/hero_de.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hero.youxingshijia.com/"/>
+  </url>
+
+  <!-- German Homepage -->
+  <url>
+    <loc>https://hero.youxingshijia.com/hero_de.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://hero.youxingshijia.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hero.youxingshijia.com/hero_en.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hero.youxingshijia.com/hero_de.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hero.youxingshijia.com/"/>
+  </url>
+
+  <!-- Historical Articles -->
+  <url>
+    <loc>https://hero.youxingshijia.com/changkong-zhuangshi.html</loc>
+  </url>
+
+  <url>
+    <loc>https://hero.youxingshijia.com/hangzhou-suiyue.html</loc>
+  </url>
+
+  <url>
+    <loc>https://hero.youxingshijia.com/jinnian-918.html</loc>
+  </url>
+
+  <url>
+    <loc>https://hero.youxingshijia.com/jiuyueshiba-jisao.html</loc>
+  </url>
+
+  <url>
+    <loc>https://hero.youxingshijia.com/nanjing-jinianguan.html</loc>
+  </url>
+
+  <url>
+    <loc>https://hero.youxingshijia.com/yongheng-shiguang.html</loc>
+  </url>
+
+  <url>
+    <loc>https://hero.youxingshijia.com/you-dao-918-2025.html</loc>
+  </url>
+
+  <url>
+    <loc>https://hero.youxingshijia.com/you-dao-jiuyiba.html</loc>
+  </url>
+
+</urlset>
